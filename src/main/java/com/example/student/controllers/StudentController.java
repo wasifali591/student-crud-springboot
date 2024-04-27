@@ -1,7 +1,7 @@
-package com.example.student.controller;
+package com.example.student.controllers;
 
-import com.example.student.entity.Student;
-import com.example.student.service.StudentService;
+import com.example.student.entities.Student;
+import com.example.student.services.StudentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,13 +20,13 @@ public class StudentController {
 
     @PostMapping("/add")
     public ResponseEntity<Student> addStudent(@RequestBody Student student){
-        Student newStudent = studentService.addStudent(student);
+        Student newStudent = studentService.add(student);
         return new ResponseEntity<>(newStudent, HttpStatus.CREATED);
     }
 
     @GetMapping("/all")
     public ResponseEntity<List<Student> > getStudent(){
-        List<Student> students = studentService.findAllStudent();
+        List<Student> students = studentService.getAll();
         return new ResponseEntity<>(students, HttpStatus.OK);
     }
 }

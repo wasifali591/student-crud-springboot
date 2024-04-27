@@ -1,8 +1,8 @@
 package com.example.student;
 
-import com.example.student.entity.Student;
-import com.example.student.repository.StudentRepository;
-import com.example.student.service.StudentService;
+import com.example.student.entities.Student;
+import com.example.student.repositories.StudentRepository;
+import com.example.student.services.StudentService;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ class StudentApplicationTests {
 	public void addStudentTest(){
 		Student student = new Student(2l,"ha ha ha", "6754738746", "nilam@mail.com");
 		when(studentRepository.save(student)).thenReturn(student);
-		assertEquals(student, studentService.addStudent(student));
+		assertEquals(student, studentService.add(student));
 	}
 
 	@Test
@@ -39,7 +39,7 @@ class StudentApplicationTests {
 				new Student(3l,"altaf", "6754738746", "altaf@mail.com"),
 				new Student(4l,"altaf", "6754738746", "altaf@mail.com"))
 				.collect(Collectors.toList()));
-		assertEquals(3, studentService.findAllStudent().size());
+		assertEquals(3, studentService.getAll().size());
 	}
 
 }
