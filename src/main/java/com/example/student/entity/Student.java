@@ -18,6 +18,18 @@ public class Student {
     public Student() {
     }
 
+    public Student(String name, String phone, String email) {
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+    }
+
+    public Student(Long id, String name, String phone, String email) {
+        this.id = id;
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+    }
 
     public Long getId() {
         return id;
