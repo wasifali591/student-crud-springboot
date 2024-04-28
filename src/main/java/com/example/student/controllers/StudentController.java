@@ -6,7 +6,6 @@ package com.example.student.controllers;
 import com.example.student.dtos.commons.StudentDto;
 import com.example.student.dtos.requests.StudentRegistrationDto;
 import com.example.student.dtos.responses.ApiResponseDto;
-import com.example.student.entities.Student;
 import com.example.student.services.StudentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,10 +35,16 @@ public class StudentController {
         this.studentService = studentService;
     }
 
+    /**
+     * This method register new student using phone number.
+     *
+     * @param studentRegistrationDto- dto to be registered
+     * @return json
+     */
     @PostMapping
-    public ResponseEntity<Object> add(@Valid @RequestBody StudentRegistrationDto studentRegistrationDto){
+    public ResponseEntity<Object> add(@Valid @RequestBody StudentRegistrationDto studentRegistrationDto) {
         logger.trace("Creating new student entity with registration data => {}", studentRegistrationDto);
-        return new ApiResponseDto().generateResponse( studentService.add(studentRegistrationDto), "Successfully registered", HttpStatus.CREATED);
+        return new ApiResponseDto().generateResponse(studentService.add(studentRegistrationDto), "Successfully registered", HttpStatus.CREATED);
     }
 
     /**
@@ -48,8 +53,21 @@ public class StudentController {
      * @return json
      */
     @GetMapping
-    public ResponseEntity<Object> getAll(){
-        logger.trace("Getting all business entity list");
+    public ResponseEntity<Object> getAll() {
+        logger.trace("Getting all student entity list");
         return new ApiResponseDto().generateResponse(studentService.getAll(), "Successfully data retrieved", HttpStatus.OK);
+    }
+
+    /**
+     * TThis method is used to get a specific  {@link StudentDto}.
+     *
+     * @param id - stduent id
+     * @return json
+     */
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getById(@PathVariable Long id) {
+
+        logger.trace("Getting student entity by id => {}", id);
+        return new ApiResponseDto().generateResponse(studentService.getById(id), "Successfully data retrieved", HttpStatus.OK);
     }
 }
