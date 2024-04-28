@@ -3,10 +3,12 @@ package com.example.student.services.impl;
  * Copyright (c) 2024 Wasif
  */
 
+import com.example.student.dtos.commons.StudentDto;
 import com.example.student.entities.Student;
 import com.example.student.exceptions.ResourceNotFoundException;
 import com.example.student.repositories.StudentRepository;
 import com.example.student.services.StudentService;
+import com.example.student.util.converters.StudentConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -26,10 +28,12 @@ import java.util.stream.Collectors;
 @Service
 public class StudentServiceImpl implements StudentService {
     private final StudentRepository studentRepository;
+    private final StudentConverter studentConverter;
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    public StudentServiceImpl(StudentRepository studentRepository) {
+    public StudentServiceImpl(StudentRepository studentRepository, StudentConverter studentConverter) {
         this.studentRepository = studentRepository;
+        this.studentConverter = studentConverter;
     }
 
     //add student
@@ -40,13 +44,13 @@ public class StudentServiceImpl implements StudentService {
 
     /**
      * This method return the list of {@link BusinessDto}.
-     * It converts {@link Student} entity to {@link BusinessDto} by {@link BusinessConverter}
+     * It converts {@link Student} entity to {@link BusinessDto} by {@link StudentConverter}
      *
      * @param
      * @return all studentDto entity.
      */
     @Override
-    public List<Student> getAll(){
+    public List<StudentDto> getAll(){
         logger.debug("Into getAll service method");
         List<Student> studentList = studentRepository.findAll();
 
@@ -56,9 +60,9 @@ public class StudentServiceImpl implements StudentService {
         }
         logger.debug("Fetched student list => {}", studentList);
         return studentList.stream()
-                .map(businessConverter::businessToBusinessDto)
+                .map(studentConverter::studentToStudentDto)
                 .collect(Collectors.toList());
-        return studentRepository.findAll();
+//        return studentRepository.findAll();
     }
 
     @Override

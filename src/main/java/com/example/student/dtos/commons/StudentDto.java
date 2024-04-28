@@ -5,11 +5,6 @@ package com.example.student.dtos.commons;
  */
 
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
 /**
  * This class is a dto class with 4 member variables.
  * It defines the details of different students.
