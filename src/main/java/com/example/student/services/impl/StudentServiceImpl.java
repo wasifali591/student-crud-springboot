@@ -90,12 +90,30 @@ public class StudentServiceImpl implements StudentService {
         return studentList.stream()
                 .map(studentConverter::studentToStudentDto)
                 .collect(Collectors.toList());
-//        return studentRepository.findAll();
     }
 
+    /**
+     * This method return the information of {@link StudentDto}.
+     *
+     * @param id - student id
+     * @return studentDto entity.
+     */
     @Override
-    public Optional<Student> getById(Long Id) {
-        return studentRepository.findById(Id);
+    public StudentDto getById(Long id) {
+        logger.debug("Into get entity service method with id => {}", id);
+        Optional<Student> optionalStudent;
+
+        optionalStudent = studentRepository.findById(id);
+
+        if (optionalStudent.isEmpty()) {
+            logger.error("No data available!");
+            throw new ResourceNotFoundException("No data available!");
+        }
+        Student student = optionalStudent.get();
+        logger.debug("Fetched business entity => {}", student);
+        StudentDto studentDto = studentConverter.studentToStudentDto(student);
+        logger.debug("Converted DTO => {} from student entity", studentDto);
+        return studentDto;
     }
 
     @Override

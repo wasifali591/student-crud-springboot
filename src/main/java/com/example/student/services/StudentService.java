@@ -16,7 +16,7 @@ public interface StudentService {
     //show all students
     public List<StudentDto> getAll();
 
-    public Optional<Student> getById(Long Id);
+    public StudentDto getById(Long Id);
 
     public Student update(Long Id, Student student);
 
