@@ -4,6 +4,7 @@ package com.example.student.controllers;
  */
 
 import com.example.student.dtos.commons.StudentDto;
+import com.example.student.dtos.requests.StudentRegistrationDto;
 import com.example.student.dtos.responses.ApiResponseDto;
 import com.example.student.entities.Student;
 import com.example.student.services.StudentService;
@@ -12,6 +13,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 /**
  * This class is a controller class of Student.
@@ -34,9 +37,9 @@ public class StudentController {
     }
 
     @PostMapping
-    public ResponseEntity<Student> addStudent(@RequestBody Student student){
-        Student newStudent = studentService.add(student);
-        return new ResponseEntity<>(newStudent, HttpStatus.CREATED);
+    public ResponseEntity<Object> add(@Valid @RequestBody StudentRegistrationDto studentRegistrationDto){
+        logger.trace("Creating new student entity with registration data => {}", studentRegistrationDto);
+        return new ApiResponseDto().generateResponse( studentService.add(studentRegistrationDto), "Successfully registered", HttpStatus.CREATED);
     }
 
     /**

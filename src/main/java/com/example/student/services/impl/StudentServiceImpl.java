@@ -4,7 +4,10 @@ package com.example.student.services.impl;
  */
 
 import com.example.student.dtos.commons.StudentDto;
+import com.example.student.dtos.requests.StudentRegistrationDto;
 import com.example.student.entities.Student;
+import com.example.student.exceptions.OperationFailedException;
+import com.example.student.exceptions.ResourceAlreadyExistsException;
 import com.example.student.exceptions.ResourceNotFoundException;
 import com.example.student.repositories.StudentRepository;
 import com.example.student.services.StudentService;
@@ -36,21 +39,46 @@ public class StudentServiceImpl implements StudentService {
         this.studentConverter = studentConverter;
     }
 
-    //add student
+    /**
+     * This method register new {@link Student}.
+     * It gets phone number from {@link StudentDto} body,
+     * if phone number is not registered then {@link StudentDto} convert to {@link Student} by {@link StudentConverter},
+     * and save {@link Student}.
+     *
+     * @param studentRegistrationDto -studentDto to be registered
+     * @return studentRegistrationDto entity
+     */
     @Override
-    public Student add(Student student){
-        return studentRepository.save(student);
+    public StudentRegistrationDto add(StudentRegistrationDto studentRegistrationDto) {
+        logger.debug("Into add entity service method with data =>{}", studentRegistrationDto);
+        if (studentRepository.findByPhoneNo(studentRegistrationDto.getPhone()).isPresent()) {
+            logger.error("Business data already exist =>{}", studentRegistrationDto);
+            throw new ResourceAlreadyExistsException("Already Exists!");
+        }
+        Student student = studentConverter.studentRegDtoToStudent(studentRegistrationDto);
+        logger.debug("Converted student entity => {} from DTO", student);
+        student = studentRepository.save(student);
+        logger.debug("Record saved =>{} in DB", student);
+        //Check student is created or not
+        if (null == student.getId()) {
+            logger.error("Failed to save business in DB => {}", student);
+            throw new OperationFailedException("Failed to create student");
+        }
+
+        StudentRegistrationDto registrationDto = studentConverter.studentToStudentRegDto(student);
+        logger.debug("Converted DTO => {} from student entity", registrationDto);
+        return registrationDto;
     }
 
     /**
-     * This method return the list of {@link BusinessDto}.
-     * It converts {@link Student} entity to {@link BusinessDto} by {@link StudentConverter}
+     * This method return the list of {@link StudentDto}.
+     * It converts {@link Student} entity to {@link StudentDto} by {@link StudentConverter}
      *
      * @param
      * @return all studentDto entity.
      */
     @Override
-    public List<StudentDto> getAll(){
+    public List<StudentDto> getAll() {
         logger.debug("Into getAll service method");
         List<Student> studentList = studentRepository.findAll();
 
