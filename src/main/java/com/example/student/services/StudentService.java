@@ -1,25 +1,26 @@
 package com.example.student.services;
+/**
+ * Copyright (c) 2024 Wasif
+ */
 
 import com.example.student.dtos.commons.StudentDto;
 import com.example.student.dtos.requests.StudentRegistrationDto;
-import com.example.student.entities.Student;
 
 import java.util.List;
-import java.util.Optional;
 
 
 public interface StudentService {
 
     //add student
-    public StudentRegistrationDto add(StudentRegistrationDto studentRegistrationDto);
+    StudentRegistrationDto add(StudentRegistrationDto studentRegistrationDto);
 
     //show all students
-    public List<StudentDto> getAll();
+    List<StudentDto> getAll();
 
-    public StudentDto getById(Long Id);
+    StudentDto getById(Long Id);
 
-    public Student update(Long Id, Student student);
+    StudentDto update(Long id, StudentDto studentDto);
 
-    public void delete(Long Id);
+    Boolean delete(Long id);
 }
 

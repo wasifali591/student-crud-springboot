@@ -110,19 +110,60 @@ public class StudentServiceImpl implements StudentService {
             throw new ResourceNotFoundException("No data available!");
         }
         Student student = optionalStudent.get();
-        logger.debug("Fetched business entity => {}", student);
+        logger.debug("Fetched student entity => {}", student);
         StudentDto studentDto = studentConverter.studentToStudentDto(student);
         logger.debug("Converted DTO => {} from student entity", studentDto);
         return studentDto;
     }
 
+    /**
+     * This method update {@link Student} identified by studentID.
+     * It find {@link Student} by id and update its changes by converting {@link StudentDto} to {@link Student},
+     * using {@link StudentConverter} and save it.
+     *
+     * @param id-        id of the entity to find. Must not be null.
+     * @param studentDto - StudentDto to be updated
+     * @return StudentDto entity
+     */
     @Override
-    public Student update(Long Id, Student student) {
-        return null;
+    public StudentDto update(Long id, StudentDto studentDto) {
+        logger.debug("Into update entity service method with id => {} and data => {}", id, studentDto);
+        // Validate.
+        if (!studentRepository.existsById(id)) {
+            logger.error("Resource doesn't exist!");
+            throw new ResourceNotFoundException("Resource doesn't exist!");
+        }
+
+        Student student = studentConverter.studentDtoToStudent(studentDto);
+        logger.debug("Converted student entity => {} from DTO => {}", student, studentDto);
+        student.setId(id);
+        student = studentRepository.save(student);
+        logger.debug("Student record updated in DB=>{}", student);
+        StudentDto dto = studentConverter.studentToStudentDto(student);
+        logger.debug("Converted DTO => {} from student entity", dto);
+        return dto;
     }
 
+    /**
+     * This method delete the {@link Student}entity identified by the given id
+     *
+     * @param id - the id of the entity to be deleted. Must not be null.
+     * @return inactive studentDto entity
+     */
     @Override
-    public void delete(Long Id) {
+    public Boolean delete(Long id) {
+        logger.debug("Into delete entity service method with id => {}", id);
+        // Validate.
+        if (studentRepository.findById(id).isEmpty()) {
+            logger.error("Resource doesn't exist!");
+            throw new ResourceNotFoundException("Resource doesn't exist!");
+        }
+
+        Student student = studentRepository.getById(id);
+        logger.debug("Fetching student entity by id => {} from DB using repository", id);
+        studentRepository.deleteById(id);
+        logger.debug("Business entity deleted from DB=>{}", student);
+        return true;
 
     }
 }

@@ -59,7 +59,7 @@ public class StudentController {
     }
 
     /**
-     * TThis method is used to get a specific  {@link StudentDto}.
+     * This method is used to get a specific  {@link StudentDto}.
      *
      * @param id - stduent id
      * @return json
@@ -69,5 +69,21 @@ public class StudentController {
 
         logger.trace("Getting student entity by id => {}", id);
         return new ApiResponseDto().generateResponse(studentService.getById(id), "Successfully data retrieved", HttpStatus.OK);
+    }
+
+    /**
+     * This method is used to update a specific student
+     *
+     * @param id - id of the entity to find. Must not be null.
+     * @param studentDto - dto to be updated
+     * @return json
+     */
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> update(@Valid @PathVariable Long id, @RequestBody StudentDto studentDto){
+
+        logger.trace("Updating student entity by id => {} id with data => {}", id, studentDto);
+        return new ApiResponseDto().generateResponse(
+                studentService.update(id, studentDto), "Successfully updated", HttpStatus.OK);
+
     }
 }
