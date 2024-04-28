@@ -51,7 +51,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public StudentRegistrationDto add(StudentRegistrationDto studentRegistrationDto) {
         logger.debug("Into add entity service method with data =>{}", studentRegistrationDto);
-        if (studentRepository.findByPhoneNo(studentRegistrationDto.getPhone()).isPresent()) {
+        if (studentRepository.findByPhone(studentRegistrationDto.getPhone()).isPresent()) {
             logger.error("Business data already exist =>{}", studentRegistrationDto);
             throw new ResourceAlreadyExistsException("Already Exists!");
         }

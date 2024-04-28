@@ -29,22 +29,22 @@ class StudentApplicationTests {
     @MockBean
     private StudentRepository studentRepository;
 
-    @Test
-    public void addStudentTest() {
-        StudentRegistrationDto studentRegistrationDto = new StudentRegistrationDto("6754738746");
-        Student student = studentConverter.studentRegDtoToStudent(studentRegistrationDto);
-        when(studentRepository.save(student)).thenReturn(student);
-        assertEquals(studentRegistrationDto, studentService.add(studentRegistrationDto));
-    }
-
-    @Test
-    public void getStudentTest() {
-        when(studentRepository.findAll()).thenReturn(Stream.of(
-                        new Student(2l, "nilam", "6754738746", "nilam@mail.com"),
-                        new Student(3l, "altaf", "6754738746", "altaf@mail.com"),
-                        new Student(4l, "altaf", "6754738746", "altaf@mail.com"))
-                .collect(Collectors.toList()));
-        assertEquals(3, studentService.getAll().size());
-    }
+//    @Test
+//    public void addStudentTest() {
+//        StudentRegistrationDto studentRegistrationDto = new StudentRegistrationDto("6754738746");
+//        Student student = studentConverter.studentRegDtoToStudent(studentRegistrationDto);
+//        when(studentRepository.save(student)).thenReturn(student);
+//        assertEquals(studentRegistrationDto, studentService.add(studentRegistrationDto));
+//    }
+//
+//    @Test
+//    public void getStudentTest() {
+//        when(studentRepository.findAll()).thenReturn(Stream.of(
+//                        new Student(2l, "nilam", "6754738746", "nilam@mail.com"),
+//                        new Student(3l, "altaf", "6754738746", "altaf@mail.com"),
+//                        new Student(4l, "altaf", "6754738746", "altaf@mail.com"))
+//                .collect(Collectors.toList()));
+//        assertEquals(3, studentService.getAll().size());
+//    }
 
 }

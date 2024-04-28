@@ -74,16 +74,29 @@ public class StudentController {
     /**
      * This method is used to update a specific student
      *
-     * @param id - id of the entity to find. Must not be null.
+     * @param id         - id of the entity to find. Must not be null.
      * @param studentDto - dto to be updated
      * @return json
      */
     @PutMapping("/{id}")
-    public ResponseEntity<Object> update(@Valid @PathVariable Long id, @RequestBody StudentDto studentDto){
+    public ResponseEntity<Object> update(@Valid @PathVariable Long id, @RequestBody StudentDto studentDto) {
 
         logger.trace("Updating student entity by id => {} id with data => {}", id, studentDto);
         return new ApiResponseDto().generateResponse(
                 studentService.update(id, studentDto), "Successfully updated", HttpStatus.OK);
 
+    }
+
+    /**
+     * This method is used to delete a specific student
+     *
+     * @param id - id of the entity to delete. Must not be null.
+     * @return json
+     */
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> delete(@PathVariable Long id) {
+        logger.trace("Deleting student entity by id => {}", id);
+        studentService.delete(id);
+        return new ApiResponseDto().generateResponse(null, "Successfully deleted", HttpStatus.OK);
     }
 }
