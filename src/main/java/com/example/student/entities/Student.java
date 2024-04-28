@@ -38,7 +38,7 @@ public class Student {
      */
     private String phone;
     /**
-     * its represent email number of the students
+     * its represent email of the students
      */
     private String email;
     /**
@@ -104,14 +104,10 @@ public class Student {
     public void setEmail(String email) {
         this.email = email;
     }
+
     @Override
     public String toString() {
-        return "Student{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", phone='" + phone + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+        return "Student{" + "id=" + id + ", name='" + name + '\'' + ", phone='" + phone + '\'' + ", email='" + email + '\'' + '}';
     }
 
 }

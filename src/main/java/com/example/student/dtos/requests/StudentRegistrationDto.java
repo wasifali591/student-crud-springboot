@@ -6,13 +6,15 @@ package com.example.student.dtos.requests;
 
 /**
  * This class is a dto class of student registration
- * It defines the details of different students.
  *
  * @author wasif
  * @version 1.0
  * @since 27/04/24
  */
 public class StudentRegistrationDto {
+    /**
+     * It represents the phone number of the student
+     */
     private String phone;
 
     //constructor

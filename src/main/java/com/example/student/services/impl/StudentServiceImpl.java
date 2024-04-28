@@ -45,14 +45,14 @@ public class StudentServiceImpl implements StudentService {
      * if phone number is not registered then {@link StudentDto} convert to {@link Student} by {@link StudentConverter},
      * and save {@link Student}.
      *
-     * @param studentRegistrationDto -studentDto to be registered
+     * @param studentRegistrationDto - studentDto to be registered
      * @return studentRegistrationDto entity
      */
     @Override
     public StudentRegistrationDto add(StudentRegistrationDto studentRegistrationDto) {
         logger.debug("Into add entity service method with data =>{}", studentRegistrationDto);
         if (studentRepository.findByPhone(studentRegistrationDto.getPhone()).isPresent()) {
-            logger.error("Business data already exist =>{}", studentRegistrationDto);
+            logger.error("Student data already exist =>{}", studentRegistrationDto);
             throw new ResourceAlreadyExistsException("Already Exists!");
         }
         Student student = studentConverter.studentRegDtoToStudent(studentRegistrationDto);
@@ -61,7 +61,7 @@ public class StudentServiceImpl implements StudentService {
         logger.debug("Record saved =>{} in DB", student);
         //Check student is created or not
         if (null == student.getId()) {
-            logger.error("Failed to save business in DB => {}", student);
+            logger.error("Failed to save student in DB => {}", student);
             throw new OperationFailedException("Failed to create student");
         }
 
@@ -74,7 +74,6 @@ public class StudentServiceImpl implements StudentService {
      * This method return the list of {@link StudentDto}.
      * It converts {@link Student} entity to {@link StudentDto} by {@link StudentConverter}
      *
-     * @param
      * @return all studentDto entity.
      */
     @Override
@@ -87,9 +86,7 @@ public class StudentServiceImpl implements StudentService {
             throw new ResourceNotFoundException("No data available!");
         }
         logger.debug("Fetched student list => {}", studentList);
-        return studentList.stream()
-                .map(studentConverter::studentToStudentDto)
-                .collect(Collectors.toList());
+        return studentList.stream().map(studentConverter::studentToStudentDto).collect(Collectors.toList());
     }
 
     /**
@@ -118,17 +115,16 @@ public class StudentServiceImpl implements StudentService {
 
     /**
      * This method update {@link Student} identified by studentID.
-     * It find {@link Student} by id and update its changes by converting {@link StudentDto} to {@link Student},
+     * It finds {@link Student} by id and update its changes by converting {@link StudentDto} to {@link Student},
      * using {@link StudentConverter} and save it.
      *
-     * @param id-        id of the entity to find. Must not be null.
+     * @param id         - id of the entity to find. Must not be null.
      * @param studentDto - StudentDto to be updated
      * @return StudentDto entity
      */
     @Override
     public StudentDto update(Long id, StudentDto studentDto) {
         logger.debug("Into update entity service method with id => {} and data => {}", id, studentDto);
-        // Validate.
         if (!studentRepository.existsById(id)) {
             logger.error("Resource doesn't exist!");
             throw new ResourceNotFoundException("Resource doesn't exist!");
@@ -145,10 +141,10 @@ public class StudentServiceImpl implements StudentService {
     }
 
     /**
-     * This method delete the {@link Student}entity identified by the given id
+     * This method delete the {@link Student} entity identified by the given id
      *
      * @param id - the id of the entity to be deleted. Must not be null.
-     * @return inactive studentDto entity
+     * @return true of false
      */
     @Override
     public Boolean delete(Long id) {

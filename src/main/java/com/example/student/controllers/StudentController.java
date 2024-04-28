@@ -61,7 +61,7 @@ public class StudentController {
     /**
      * This method is used to get a specific  {@link StudentDto}.
      *
-     * @param id - stduent id
+     * @param id - student id
      * @return json
      */
     @GetMapping("/{id}")

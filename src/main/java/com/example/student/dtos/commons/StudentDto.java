@@ -14,9 +14,22 @@ package com.example.student.dtos.commons;
  * @since 27/04/24
  */
 public class StudentDto {
+
+    /**
+     * It represents the unique id of every record.
+     */
     private Long id;
+    /**
+     * It represents the name of the students
+     */
     private String name;
+    /**
+     * It represents the phone number of the students
+     */
     private String phone;
+    /**
+     * It represents the email of the students
+     */
     private String email;
 
     //constructor
@@ -31,8 +44,6 @@ public class StudentDto {
     }
 
     //getter & setter
-
-
     public Long getId() {
         return id;
     }
