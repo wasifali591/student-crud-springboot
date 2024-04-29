@@ -19,12 +19,11 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ModelMapperConfiguration {
     @Bean
-    public ModelMapper nullSkipModelMapper() {
+    public ModelMapper modelMapper() {
         ModelMapper modelMapper = new ModelMapper();
-        modelMapper.getConfiguration()
-                .setSkipNullEnabled(true)
-                .setMatchingStrategy(MatchingStrategies.LOOSE)
-                .setAmbiguityIgnored(true);
+        modelMapper.getConfiguration().setSkipNullEnabled(true)// Configure null handling
+                .setMatchingStrategy(MatchingStrategies.LOOSE)// Configure matching strategy
+                .setAmbiguityIgnored(true);// Configure ambiguity handling
         return modelMapper;
     }
 }

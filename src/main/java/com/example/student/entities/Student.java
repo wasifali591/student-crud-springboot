@@ -36,7 +36,8 @@ public class Student {
     /**
      * its represent phone number of the students
      */
-    private String phone;
+    @Column(length = 10, unique = true)
+    private Long phone;
     /**
      * its represent email of the students
      */
@@ -59,13 +60,13 @@ public class Student {
     public Student() {
     }
 
-    public Student(String name, String phone, String email) {
+    public Student(String name, Long phone, String email) {
         this.name = name;
         this.phone = phone;
         this.email = email;
     }
 
-    public Student(Long id, String name, String phone, String email) {
+    public Student(Long id, String name, Long phone, String email) {
         this.id = id;
         this.name = name;
         this.phone = phone;
@@ -89,11 +90,11 @@ public class Student {
         this.name = name;
     }
 
-    public String getPhone() {
+    public Long getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(Long phone) {
         this.phone = phone;
     }
 
@@ -107,7 +108,6 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student{" + "id=" + id + ", name='" + name + '\'' + ", phone='" + phone + '\'' + ", email='" + email + '\'' + '}';
+        return "Student{" + "id=" + id + ", name='" + name + '\'' + ", phone=" + phone + ", email='" + email + '\'' + ", createdDate=" + createdDate + ", updatedDate=" + updatedDate + '}';
     }
-
 }

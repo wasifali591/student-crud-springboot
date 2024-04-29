@@ -82,8 +82,7 @@ public class StudentController {
     public ResponseEntity<Object> update(@Valid @PathVariable Long id, @RequestBody StudentDto studentDto) {
 
         logger.trace("Updating student entity by id => {} id with data => {}", id, studentDto);
-        return new ApiResponseDto().generateResponse(
-                studentService.update(id, studentDto), "Successfully updated", HttpStatus.OK);
+        return new ApiResponseDto().generateResponse(studentService.update(id, studentDto), "Successfully updated", HttpStatus.OK);
 
     }
 

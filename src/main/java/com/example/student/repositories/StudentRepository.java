@@ -24,6 +24,6 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
      * @param phone - phone number to find entity. Must not be null.
      * @return Optional
      */
-    Optional<Student> findByPhone(String phone);
+    Optional<Student> findByPhone(Long phone);
 
 }

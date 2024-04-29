@@ -15,23 +15,22 @@ public class StudentRegistrationDto {
     /**
      * It represents the phone number of the student
      */
-    private String phone;
+    private Long phone;
 
     //constructor
     public StudentRegistrationDto() {
     }
 
-    public StudentRegistrationDto(String phone) {
+    public StudentRegistrationDto(Long phone) {
         this.phone = phone;
     }
 
     //getter & setter
-
-    public String getPhone() {
+    public Long getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(Long phone) {
         this.phone = phone;
     }
 }

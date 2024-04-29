@@ -26,7 +26,7 @@ public class StudentDto {
     /**
      * It represents the phone number of the students
      */
-    private String phone;
+    private Long phone;
     /**
      * It represents the email of the students
      */
@@ -36,7 +36,7 @@ public class StudentDto {
     public StudentDto() {
     }
 
-    public StudentDto(Long id, String name, String phone, String email) {
+    public StudentDto(Long id, String name, Long phone, String email) {
         this.id = id;
         this.name = name;
         this.phone = phone;
@@ -60,11 +60,11 @@ public class StudentDto {
         this.name = name;
     }
 
-    public String getPhone() {
+    public Long getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(Long phone) {
         this.phone = phone;
     }
 

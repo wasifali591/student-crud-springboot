@@ -46,7 +46,7 @@ public class StudentServiceImpl implements StudentService {
      * and save {@link Student}.
      *
      * @param studentRegistrationDto - studentDto to be registered
-     * @return studentRegistrationDto entity
+     * @return studentRegistrationDto - entity
      */
     @Override
     public StudentRegistrationDto add(StudentRegistrationDto studentRegistrationDto) {
