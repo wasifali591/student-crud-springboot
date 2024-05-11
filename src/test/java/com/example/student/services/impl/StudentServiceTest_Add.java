@@ -8,7 +8,7 @@ import com.example.student.entities.Student;
 import com.example.student.exceptions.ResourceAlreadyExistsException;
 import com.example.student.repositories.StudentRepository;
 import com.example.student.services.StudentService;
-import com.example.student.util.converters.impl.StudentConverterImpl;
+import com.example.student.utility.converters.impl.StudentConverterImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -1,4 +1,4 @@
-package com.example.student.util.converters.impl;
+package com.example.student.utility.converters.impl;
 /**
  * Copyright (c) 2024 Wasif
  */
@@ -6,7 +6,7 @@ package com.example.student.util.converters.impl;
 import com.example.student.dtos.commons.StudentDto;
 import com.example.student.dtos.requests.StudentRegistrationDto;
 import com.example.student.entities.Student;
-import com.example.student.util.converters.StudentConverter;
+import com.example.student.utility.converters.StudentConverter;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 

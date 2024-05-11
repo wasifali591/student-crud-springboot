@@ -1,4 +1,4 @@
-package com.example.student.util.converters;
+package com.example.student.utility.converters;
 /**
  * Copyright (c) 2024 Wasif
  */

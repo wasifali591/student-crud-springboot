@@ -4,13 +4,11 @@ package com.example.student.exceptions;
  */
 
 import com.example.student.dtos.responses.ApiResponseDto;
+import com.example.student.utility.Constant;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Controller advice class to handle exceptions in centralized way.
@@ -32,7 +30,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Object> handleOperationFailedException(Exception ex) {
 
         String errorMessage = ex.getMessage();
-        errorMessage = (null == errorMessage) ? "Internal Server Error" : errorMessage;
+        errorMessage = (null == errorMessage) ? Constant.INTERNAL_SERVER_ERROR : errorMessage;
 
         return new ApiResponseDto().generateResponse(null, errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
     }
@@ -47,7 +45,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Object> handleResourceNotFoundException(Exception ex) {
 
         String errorMessage = ex.getMessage();
-        errorMessage = (null == errorMessage) ? "Internal Server Error" : errorMessage;
+        errorMessage = (null == errorMessage) ? Constant.INTERNAL_SERVER_ERROR : errorMessage;
 
         return new ApiResponseDto().generateResponse(null, errorMessage, HttpStatus.BAD_REQUEST);
     }
@@ -62,7 +60,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Object> handleResourceAlreadyExceptionException(Exception ex) {
 
         String errorMessage = ex.getMessage();
-        errorMessage = (null == errorMessage) ? "Internal Server Error" : errorMessage;
+        errorMessage = (null == errorMessage) ? Constant.INTERNAL_SERVER_ERROR : errorMessage;
 
         return new ApiResponseDto().generateResponse(null, errorMessage, HttpStatus.CONFLICT);
     }

@@ -54,8 +54,7 @@ public interface StudentService {
      * This method delete the {@link Student} entity identified by the given id.
      *
      * @param id - id of the {@link Student} entity to delete. Must not be null.
-     * @return true or false
      */
-    Boolean delete(Long id);
+    void delete(Long id);
 }
 

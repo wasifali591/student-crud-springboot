@@ -11,7 +11,8 @@ import com.example.student.exceptions.ResourceAlreadyExistsException;
 import com.example.student.exceptions.ResourceNotFoundException;
 import com.example.student.repositories.StudentRepository;
 import com.example.student.services.StudentService;
-import com.example.student.util.converters.StudentConverter;
+import com.example.student.utility.Constant;
+import com.example.student.utility.converters.StudentConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -82,7 +83,7 @@ public class StudentServiceImpl implements StudentService {
         List<Student> studentList = studentRepository.findAll();
 
         if (studentList.isEmpty()) {
-            logger.error("No data available!");
+            logger.error(Constant.NO_DATA_AVAILABLE);
             throw new ResourceNotFoundException("No data available!");
         }
         logger.debug("Fetched student list => {}", studentList);
@@ -103,7 +104,7 @@ public class StudentServiceImpl implements StudentService {
         optionalStudent = studentRepository.findById(id);
 
         if (optionalStudent.isEmpty()) {
-            logger.error("No data available!");
+            logger.error(Constant.NO_DATA_AVAILABLE);
             throw new ResourceNotFoundException("No data available!");
         }
         Student student = optionalStudent.get();
@@ -126,7 +127,7 @@ public class StudentServiceImpl implements StudentService {
     public StudentDto update(Long id, StudentDto studentDto) {
         logger.debug("Into update entity service method with id => {} and data => {}", id, studentDto);
         if (!studentRepository.existsById(id)) {
-            logger.error("Resource doesn't exist!");
+            logger.error(Constant.RESOURCE_DOES_NOT_EXIST);
             throw new ResourceNotFoundException("Resource doesn't exist!");
         }
 
@@ -144,22 +145,20 @@ public class StudentServiceImpl implements StudentService {
      * This method delete the {@link Student} entity identified by the given id
      *
      * @param id - the id of the entity to be deleted. Must not be null.
-     * @return true of false
      */
     @Override
-    public Boolean delete(Long id) {
+    public void delete(Long id) {
         logger.debug("Into delete entity service method with id => {}", id);
         // Validate.
         if (studentRepository.findById(id).isEmpty()) {
-            logger.error("Resource doesn't exist!");
+            logger.error(Constant.RESOURCE_DOES_NOT_EXIST);
             throw new ResourceNotFoundException("Resource doesn't exist!");
         }
 
-        Student student = studentRepository.getById(id);
+        Student student = studentRepository.getReferenceById(id);
         logger.debug("Fetching student entity by id => {} from DB using repository", id);
         studentRepository.deleteById(id);
         logger.debug("Business entity deleted from DB=>{}", student);
-        return true;
 
     }
 }

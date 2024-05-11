@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 /**
- * This class is a repository interface which provides crud operation for {@Link Student}
+ * This class is a repository interface which provides crud operation for {@link Student}
  *
  * @author Wasif
  * @version 1.0
